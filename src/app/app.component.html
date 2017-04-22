@@ -1,0 +1,11 @@
+<div class="gft-component">
+	<h1>GFT Test</h1>
+	<span>Select a mode:</span>
+	<div>
+		<button (click)="openCashRegister()">Cash Register</button>
+		<button (click)="openPairWise()">Pair Wise</button>
+	</div>
+	<gft-cash-register *ngIf="cashRegister"></gft-cash-register>
+	<gft-pair-wise *ngIf="pairWise"></gft-pair-wise>
+
+</div>
