@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'gft-app',
-  template: require('./app.component.html'),
-  styles: [require('./app.component.scss')]
+    selector: 'gft-app',
+    template: require('./app.component.html'),
+    styles: [require('./app.component.scss')]
 })
 export class AppComponent {
 
@@ -22,6 +22,11 @@ export class AppComponent {
     openCashRegister() {
     	this.pairWise = false;
     	this.cashRegister = true;
+    }
+
+    backToModeSelection() {
+        this.pairWise = false;
+        this.cashRegister = false;
     }
     
 }
