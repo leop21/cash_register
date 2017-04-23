@@ -17,7 +17,7 @@ export class CashRegisterComponent implements OnInit {
     public paymentMessage: string;
     public initialCash: number;
     public soldAmount: any;
-    
+
     ngOnInit(): void {
         this.reset();
     }
@@ -28,8 +28,14 @@ export class CashRegisterComponent implements OnInit {
         this.total = 0;
         this.resetCash();
         this.resetPaymentCash();    
-        this.initialCash = this.total;
+        this.initialCash = 0;
         this.soldAmount = 0;
+    }
+
+    //Sets initial cash
+    setInitialCash() {
+        this.initialCash = this.total;
+        this.mode = 2;
     }
 
     //Resets cash balance
