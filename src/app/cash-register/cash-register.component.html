@@ -20,7 +20,7 @@
                 <tr *ngFor="let denomination of cash">
                     <td>{{denomination.label}} (${{denomination.value}}) </td>
                     <td><input type="number" class="amount-input" onkeypress="return event.charCode >= 48" min="0" [(ngModel)]="denomination.amount" (ngModelChange)="updateTotal()" [disabled]="mode == 1"/></td>
-                    <td>${{denomination.amount*denomination.value}}</td> 
+                    <td>${{+denomination.amount*+denomination.value}}</td> 
                 </tr>
                 <tr>
                     <th>Total</th>
