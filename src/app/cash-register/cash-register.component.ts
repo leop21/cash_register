@@ -174,7 +174,6 @@ export class CashRegisterComponent implements OnInit {
         for (let i = this.paymentCash.length - 1; i >= 0; i--) {
             this.cash[i].amount = this.cash[i].amount + this.paymentCash[i].amount;
         }
-        this.soldAmount = this.soldAmount + this.paymentTotal;
     }
 
     // Calculates the change due
@@ -191,13 +190,16 @@ export class CashRegisterComponent implements OnInit {
             remainingChangeDue = remainingChangeDue - (potentialChange[this.paymentCash[i].value]*this.paymentCash[i].value);
         }
 
-        if(remainingChangeDue>0)
+        if(remainingChangeDue>0) {
             this.paymentMessage = "Insufficient Funds";
+            this.soldAmount = this.soldAmount + this.paymentTotal;
+        }
         else {
             for (let j = this.cash.length - 1; j >= 0; j--) {
                 this.cash[j].amount = this.cash[j].amount - potentialChange[this.paymentCash[j].value];
             }
             this.paymentMessage = "Change Due: $"+change;
+            this.soldAmount = this.soldAmount + this.price;
         }
     }
 
