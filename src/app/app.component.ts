@@ -11,19 +11,19 @@ export class AppComponent {
     public cashRegister: Boolean;
     public pairWise: Boolean;
 
-    constructor() {
-    }
-
+    // Shows the Pair Wise Screen
     openPairWise() {
         this.cashRegister = false;
         this.pairWise = true;
     }
 
+    // Shows the Cash Register Screen
     openCashRegister() {
         this.pairWise = false;
         this.cashRegister = true;
     }
 
+    // Shows the Mode Selection Screen
     backToModeSelection() {
         this.pairWise = false;
         this.cashRegister = false;

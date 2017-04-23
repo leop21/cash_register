@@ -12,6 +12,7 @@ export class PairWiseComponent {
     public arg: any;
     public result: any;
 
+    // Executes the pair wise algorithm and shows the result
     pairWise() {
         if(this.array && this.arg) {
             this.result = 0;

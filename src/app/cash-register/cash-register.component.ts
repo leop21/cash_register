@@ -17,14 +17,12 @@ export class CashRegisterComponent implements OnInit {
     public paymentMessage: string;
     public initialCash: number;
     public soldAmount: any;
-
-    constructor() {
-    }
-
+    
     ngOnInit(): void {
         this.reset();
     }
 
+    //Resets configuration
     reset() {
         this.mode = 0;
         this.total = 0;
@@ -34,6 +32,7 @@ export class CashRegisterComponent implements OnInit {
         this.soldAmount = 0;
     }
 
+    //Resets cash balance
     resetCash() {
         this.cash = [
             {
@@ -85,6 +84,7 @@ export class CashRegisterComponent implements OnInit {
         this.updateTotal();
     }
 
+    //Resets payment cash
     resetPaymentCash() {
         this.price = null;
         this.paymentCash = [
@@ -137,6 +137,7 @@ export class CashRegisterComponent implements OnInit {
         this.updatePaymentTotal();
     }
 
+    // Updates cash balance total
     updateTotal() {
         let newTotal = 0;
         this.cash.forEach(function(denomination:any) {
@@ -145,6 +146,7 @@ export class CashRegisterComponent implements OnInit {
         this.total = newTotal;
     }
 
+    // Updates payment total
     updatePaymentTotal() {
         let newTotal = 0;
         this.paymentCash.forEach(function(denomination:any) {
@@ -153,6 +155,7 @@ export class CashRegisterComponent implements OnInit {
         this.paymentTotal = newTotal;
     }
 
+    // Makes payment 
     makePayment() {
         if(this.price && this.paymentTotal && this.paymentTotal >= this.price) {
             this.addCash();
@@ -160,49 +163,39 @@ export class CashRegisterComponent implements OnInit {
         }
     }
 
+    // Adds payment cash to cash balance
     addCash() {
         for (let i = this.paymentCash.length - 1; i >= 0; i--) {
-            //console.log(this.cash[i].amount, this.paymentCash[i].amount);
             this.cash[i].amount = this.cash[i].amount + this.paymentCash[i].amount;
-            //console.log(this.cash[i].amount);
         }
         this.soldAmount = this.soldAmount + this.paymentTotal;
     }
 
+    // Calculates the change due
     getChangeDue() {
         let change: any = (this.paymentTotal - this.price).toFixed(2);
-        //console.log(this.paymentTotal, this.price, change);
         let remainingChangeDue: any = change;
         let potentialChange: any = [];
         for (let i = this.paymentCash.length - 1; i >= 0; i--) {
             let neededAmount:number = Math.floor(remainingChangeDue/this.paymentCash[i].value);
-            //console.log(remainingChangeDue+"/"+this.paymentCash[i].value)
-            //console.log(neededAmount);
-
             if(this.cash[i].amount <= neededAmount)
                 potentialChange[this.paymentCash[i].value] = this.cash[i].amount;
             else
                 potentialChange[this.paymentCash[i].value] = neededAmount;
-
             remainingChangeDue = remainingChangeDue - (potentialChange[this.paymentCash[i].value]*this.paymentCash[i].value);
-            //remainingChangeDue = remainingChangeDue.toFixed(2);
         }
-
-        //console.log(remainingChangeDue);
-        //console.log(potentialChange);
 
         if(remainingChangeDue>0)
             this.paymentMessage = "Insufficient Funds";
         else {
             for (let j = this.cash.length - 1; j >= 0; j--) {
                 this.cash[j].amount = this.cash[j].amount - potentialChange[this.paymentCash[j].value];
-                //console.log(this.cash[j].amount);
             }
-            //console.log(this.cash);
             this.paymentMessage = "Change Due: $"+change;
         }
     }
 
+    // Confirms the payment and set flags to start a new one
     confirmPayment() {
         if(this.paymentMessage != "Closed")
             this.paymentMessage = "Closed";
@@ -212,6 +205,7 @@ export class CashRegisterComponent implements OnInit {
         }
     }
 
+    // Shows the current cash balance screen
     showCurrentCashBalance() {
         this.updateTotal();
         this.mode = 1;
