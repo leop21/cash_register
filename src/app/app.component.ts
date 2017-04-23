@@ -8,20 +8,20 @@ import { CommonModule } from '@angular/common';
 })
 export class AppComponent {
 
-	public cashRegister: Boolean;
-	public pairWise: Boolean;
+    public cashRegister: Boolean;
+    public pairWise: Boolean;
 
     constructor() {
     }
 
     openPairWise() {
-    	this.cashRegister = false;
-    	this.pairWise = true;
+        this.cashRegister = false;
+        this.pairWise = true;
     }
 
     openCashRegister() {
-    	this.pairWise = false;
-    	this.cashRegister = true;
+        this.pairWise = false;
+        this.cashRegister = true;
     }
 
     backToModeSelection() {

@@ -127,7 +127,7 @@ export class CashRegisterComponent implements OnInit {
     updateTotal() {
         let newTotal = 0;
         this.cash.forEach(function(denomination:any) {
-            newTotal += (denomination.value * denomination.amount);
+            newTotal = newTotal + (denomination.value * denomination.amount);
         });
         this.total = newTotal;
     }
@@ -135,7 +135,7 @@ export class CashRegisterComponent implements OnInit {
     updatePaymentTotal() {
         let newTotal = 0;
         this.paymentCash.forEach(function(denomination:any) {
-            newTotal += (denomination.value * denomination.amount);
+            newTotal = newTotal + (denomination.value * denomination.amount);
         });
         this.paymentTotal = newTotal;
     }
@@ -171,8 +171,8 @@ export class CashRegisterComponent implements OnInit {
             else
                 potentialChange[this.paymentCash[i].value] = neededAmount;
 
-            remainingChangeDue -= (potentialChange[this.paymentCash[i].value]*this.paymentCash[i].value);
-            remainingChangeDue = remainingChangeDue.toFixed(2);
+            remainingChangeDue = remainingChangeDue - (potentialChange[this.paymentCash[i].value]*this.paymentCash[i].value);
+            //remainingChangeDue = remainingChangeDue.toFixed(2);
         }
 
         //console.log(remainingChangeDue);

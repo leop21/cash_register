@@ -1,61 +1,61 @@
 <div class="cash-register-component">
-	<h1>Cash Register</h1>
+    <h1>Cash Register</h1>
 
-	
-	<div *ngIf="mode <= 1">
-		<span *ngIf="mode == 0">Enter Initial Cash Balance:</span>
-		<span *ngIf="mode == 1">Cash Balance:</span>
-		<table>			
-			<tr>
-				<th>Denomination</th>
-				<th>Amount</th>
-				<th>Value</th>
-			</tr>
-			<tr *ngFor="let denomination of cash">
-				<td>{{denomination.label}} ({{denomination.value}}) </td>
-				<td><input type="number" class="amount-input" [(ngModel)]="denomination.amount" (ngModelChange)="updateTotal()" [disabled]="mode == 1"/></td>
-				<td>{{denomination.amount*denomination.value}}</td> 
-			</tr>
-		  	<tr>
-				<th>Total</th>
-				<th>{{total}}</th>
-			</tr>
-		</table>
-		<div *ngIf="mode == 1">
-			<span>Initial Cash: {{initialCash}}</span>
-			<span>Sold Amount: {{soldAmount}}</span>
-			<button (click)="mode = 2">BACK TO PAYMENT</button>
-		</div>
-		<button *ngIf="mode == 0" (click)="mode = 2">CONFIRM</button>
-	</div>
+    
+    <div *ngIf="mode <= 1">
+        <span *ngIf="mode == 0">Enter Initial Cash Balance:</span>
+        <span *ngIf="mode == 1">Cash Balance:</span>
+        <table>         
+            <tr>
+                <th>Denomination</th>
+                <th>Amount</th>
+                <th>Value</th>
+            </tr>
+            <tr *ngFor="let denomination of cash">
+                <td>{{denomination.label}} ({{denomination.value}}) </td>
+                <td><input type="number" class="amount-input" [(ngModel)]="denomination.amount" (ngModelChange)="updateTotal()" [disabled]="mode == 1"/></td>
+                <td>{{denomination.amount*denomination.value}}</td> 
+            </tr>
+            <tr>
+                <th>Total</th>
+                <th>{{total}}</th>
+            </tr>
+        </table>
+        <div *ngIf="mode == 1">
+            <span>Initial Cash: {{initialCash}}</span>
+            <span>Sold Amount: {{soldAmount}}</span>
+            <button (click)="mode = 2">BACK TO PAYMENT</button>
+        </div>
+        <button *ngIf="mode == 0" (click)="mode = 2">CONFIRM</button>
+    </div>
 
-	<div *ngIf="mode == 2">
-		<div>
-			<span>Price:</span>
-			<input type="number" name="price" [(ngModel)]="price" [disabled]="paymentMessage"/>
-		</div>
-		<table>			
-			<tr>
-				<th>Denomination</th>
-				<th>Amount</th>
-				<th>Value</th>
-			</tr>
-			<tr *ngFor="let denomination of paymentCash">
-				<td>{{denomination.label}} ({{denomination.value}}) </td>
-				<td><input type="number" [disabled]="paymentMessage" class="amount-input" [(ngModel)]="denomination.amount" (ngModelChange)="updatePaymentTotal()"/></td>
-				<td>{{denomination.amount*denomination.value}}</td> 
-			</tr>
-		  	<tr>
-				<th>Total</th>
-				<th>{{paymentTotal}}</th>
-			</tr>
-		</table>
-		<button (click)="makePayment()" *ngIf="!paymentMessage">MAKE PAYMENT</button>
-		<button (click)="showCurrentCashBalance()" *ngIf="!paymentMessage">CURRENT CASH BALANCE</button>
-		<div *ngIf="paymentMessage">
-			<span>{{paymentMessage}}</span>
-			<button (click)="confirmPayment()">OK</button>
-		</div>		
-	</div>
+    <div *ngIf="mode == 2">
+        <div>
+            <span>Price:</span>
+            <input type="number" name="price" [(ngModel)]="price" [disabled]="paymentMessage"/>
+        </div>
+        <table>         
+            <tr>
+                <th>Denomination</th>
+                <th>Amount</th>
+                <th>Value</th>
+            </tr>
+            <tr *ngFor="let denomination of paymentCash">
+                <td>{{denomination.label}} ({{denomination.value}}) </td>
+                <td><input type="number" [disabled]="paymentMessage" class="amount-input" [(ngModel)]="denomination.amount" (ngModelChange)="updatePaymentTotal()"/></td>
+                <td>{{denomination.amount*denomination.value}}</td> 
+            </tr>
+            <tr>
+                <th>Total</th>
+                <th>{{paymentTotal}}</th>
+            </tr>
+        </table>
+        <button (click)="makePayment()" *ngIf="!paymentMessage">MAKE PAYMENT</button>
+        <button (click)="showCurrentCashBalance()" *ngIf="!paymentMessage">CURRENT CASH BALANCE</button>
+        <div *ngIf="paymentMessage">
+            <span>{{paymentMessage}}</span>
+            <button (click)="confirmPayment()">OK</button>
+        </div>      
+    </div>
 
 </div>
