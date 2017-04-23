@@ -15,14 +15,23 @@ export class PairWiseComponent {
     pairWise() {
         if(this.array && this.arg) {
             this.result = 0;
-            let array = JSON.parse(this.array);
-            let used:any = [];
-            for (let i = 0; i < array.length; ++i) {
-                for (let j = 0; j < array.length; ++j) {
-                    if((i != j) && !used[i] && !used[j] && (array[i] + array[j] == this.arg)) {
-                        this.result = this.result + (i+j);
-                        used[i] = true;
-                        used[j] = true;
+            let array:any;
+
+            try {
+                array = JSON.parse(this.array);
+            } catch(e) {
+                alert("Invalid array value");
+            }
+            
+            if(array) {
+                let used:any = [];
+                for (let i = 0; i < array.length; ++i) {
+                    for (let j = 0; j < array.length; ++j) {
+                        if((i != j) && !used[i] && !used[j] && (array[i] + array[j] == this.arg)) {
+                            this.result = this.result + (i+j);
+                            used[i] = true;
+                            used[j] = true;
+                        }
                     }
                 }
             }

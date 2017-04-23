@@ -1,9 +1,11 @@
 <div class="gft-component">
-    <h1>Pair Wise</h1>
-    <span>array:</span><input type="text" [(ngModel)]="array"/>
-    <span>arg:</span><input type="number" [(ngModel)]="arg"/>
-
-    <button (click)="pairWise()">PAIR WISE</button>
-
-    <div *ngIf="result">Result: {{result}}</div>
+    <h1 class="section">Pair Wise</h1>
+    <div class="section bold">array: <input type="text" [(ngModel)]="array"/></div>
+    <div class="section bold">arg: <input type="number" [(ngModel)]="arg"/></div>
+    <div class="section">
+        <button (click)="pairWise()">Pair Wise</button>
+    </div>
+    <div class="section bold" *ngIf="result">
+        <div>Result: {{result}}</div>
+    </div>
 </div>

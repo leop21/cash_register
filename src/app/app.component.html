@@ -1,13 +1,15 @@
 <div class="gft-component">
     <div *ngIf="!cashRegister && !pairWise">
-        <h1>GFT Test</h1>
-        <span>Select a mode:</span>
-        <div>
+        <h1 class="section">GFT Test</h1>
+        <div class="section">
+            <span class="bold">Select one:</span>
+        </div>
+        <div class="section">
             <button (click)="openCashRegister()">Cash Register</button>
             <button (click)="openPairWise()">Pair Wise</button>
         </div>
     </div>  
-    <div *ngIf="cashRegister || pairWise">
+    <div *ngIf="cashRegister || pairWise" class="section">
         <button (click)="backToModeSelection()">Back to Mode Selection</button>
     </div>
     <gft-cash-register *ngIf="cashRegister"></gft-cash-register>

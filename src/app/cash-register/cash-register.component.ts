@@ -22,56 +22,71 @@ export class CashRegisterComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        this.reset();
+    }
+
+    reset() {
         this.mode = 0;
         this.total = 0;
+        this.resetCash();
+        this.resetPaymentCash();    
+        this.initialCash = this.total;
+        this.soldAmount = 0;
+    }
+
+    resetCash() {
         this.cash = [
             {
                 label: "PENNY", 
                 value: 0.01,
-                amount: 100
+                amount: 0
             },
             {
                 label: "NICKEL", 
                 value: 0.05,
-                amount: 100
+                amount: 0
             },
             {
                 label: "DIME", 
                 value: 0.1,
-                amount: 100
+                amount: 0
             },
             {
                 label: "QUARTER", 
                 value: 0.25,
-                amount: 100
+                amount: 0
             },
             {
                 label: "ONE", 
                 value: 1,
-                amount: 100
+                amount: 0
             },
             {
                 label: "FIVE", 
                 value: 5,
-                amount: 100
+                amount: 0
             },
             {
                 label: "TEN", 
                 value: 10,
-                amount: 100
+                amount: 0
             },
             {
                 label: "TWENTY", 
                 value: 20,
-                amount: 100
+                amount: 0
             },
             {
                 label: "ONE HUNDRED", 
                 value: 100,
-                amount: 100
+                amount: 0
             }
-        ];
+        ];        
+        this.updateTotal();
+    }
 
+    resetPaymentCash() {
+        this.price = null;
         this.paymentCash = [
             {
                 label: "PENNY", 
@@ -119,9 +134,7 @@ export class CashRegisterComponent implements OnInit {
                 amount: 0
             }
         ];
-        this.updateTotal();
-        this.initialCash = this.total;
-        this.soldAmount = 0;
+        this.updatePaymentTotal();
     }
 
     updateTotal() {
@@ -141,7 +154,7 @@ export class CashRegisterComponent implements OnInit {
     }
 
     makePayment() {
-        if(this.paymentTotal >= this.price) {
+        if(this.price && this.paymentTotal && this.paymentTotal >= this.price) {
             this.addCash();
             this.getChangeDue();
         }
@@ -193,8 +206,10 @@ export class CashRegisterComponent implements OnInit {
     confirmPayment() {
         if(this.paymentMessage != "Closed")
             this.paymentMessage = "Closed";
-        else
+        else {
             this.paymentMessage = null;
+            this.resetPaymentCash();
+        }
     }
 
     showCurrentCashBalance() {
